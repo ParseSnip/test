@@ -11,5 +11,5 @@ document.getElementById('delete').onclick = function(e){
 }
 
 function processResult() {
-  window.alert("Product deleted! mmk");
+  window.alert("Product deleted! mmkk");
 }
