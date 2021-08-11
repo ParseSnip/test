@@ -4,7 +4,7 @@ const expect = require('chai').expect
 
 
 describe('testing a unit test', function(){
-    it('should return true', function(){
-        assert.equal(3,3)
+    it('should fail', function(){
+        assert.equal(3,2)
     })
 })
