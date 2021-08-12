@@ -1,7 +1,7 @@
 let sinon = require('sinon');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let app = require('./app.js');
+let app = require('../app');
 let assert = require('chai').assert;
 let should = require('chai').should();
 let expect = require('chai').expect;
@@ -63,11 +63,11 @@ describe('MyAPI', function() {
         });   
   });
 
-  it('should get 500 for invalid search parameters', (done) => {
+  it('should get 200 for valid search parameters', (done) => {
     chai.request(app)
         .get('/api/products/search?keys=Back')
         .end((err, res) => {
-            res.should.have.status(500);
+            res.should.have.status(200);
             done();
         });   
   });
