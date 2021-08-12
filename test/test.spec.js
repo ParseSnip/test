@@ -9,19 +9,20 @@ let expect = require('chai').expect;
  
 chai.use(chaiHttp);
 describe('MyAPI', function() {
-  beforeEach(function() {
-    this.xhr = sinon.useFakeXMLHttpRequest();
+  // beforeEach(function() {
+  //   this.xhr = sinon.useFakeXMLHttpRequest();
  
-    this.requests = [];
-    this.xhr.onCreate = function(xhr) {
-      this.requests.push(xhr);
-    }.bind(this);
-  });
+  //   this.requests = [];
+  //   this.xhr.onCreate = function(xhr) {
+  //     this.requests.push(xhr);
+  //   }.bind(this);
+  // });
  
-  afterEach(function() {
-    this.xhr.restore();
-  });
- 
+  // afterEach(function() {
+  //   this.xhr.restore();
+  // });
+ //above = boiler plate
+
   //Tests etc. go here
 
   it('should be true', () => {
@@ -36,7 +37,7 @@ describe('MyAPI', function() {
 
   it('should get valid JSON response and have Essential Backpack as the first item', (done) => {
     chai.request(app)
-        .get('/api/products/search?keywords=Back')
+        .get('/api/products/search?keywords=Back')//endpoint to test
         .end((err, res) => {
             res.should.have.status(200);
             res.body[0].name.should.be.eq("Essential Backpack")
@@ -71,5 +72,14 @@ describe('MyAPI', function() {
             done();
         });   
   });
-
+  
+  it('should have results equal 1 for valid colour search', (done)=>{
+    chai.request(app)
+      .get('/api/products/detailSearch?color[op]=eq&color[val]=orange')
+      .end((err,res)=>{
+        res.body.should.have.lengthOf(1)
+        
+        done()
+      })
+  })
 });
